@@ -2,17 +2,32 @@ import styled from 'styled-components'
 import axios from 'axios'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function HomePage() {
   const [data, setData] = useState([])
   const URL = 'https://mock-api.driven.com.br/api/v8/cineflex/movies'
 
   useEffect(() => {
-    axios.get(URL).then(response => {
-      console.log(response.data)
-      setData(response.data)
-    })
+    axios
+      .get(URL)
+      .then(response => {
+        console.log(response.data)
+        setData(response.data)
+      })
+      .catch(() => console.error('algum erro ocorreu'))
   }, [])
+
+  if (data.length === 0) {
+    return (
+      <PageContainer>
+        <img
+          src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif"
+          alt=""
+        />
+      </PageContainer>
+    )
+  }
 
   return (
     <PageContainer>
@@ -21,7 +36,9 @@ export default function HomePage() {
         {data.map(data => (
           <div key={data.id}>
             <MovieContainer>
-              <img src={data.posterURL} alt="poster" />
+              <Link to={`/sessions/${data.id}`}>
+                <img src={data.posterURL} alt="poster" />
+              </Link>
             </MovieContainer>
           </div>
         ))}
