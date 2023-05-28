@@ -7,7 +7,9 @@ export default function SeatsPage() {
   const [data, setData] = useState([])
   const { idShowtime } = useParams()
   const [seatsList, setSeatsList] = useState([])
-
+  const [seatsListId, setSeatsListId] = useState([])
+  const [name, setName] = useState('')
+  const [cpf, setCpf] = useState('')
   const URL = `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idShowtime}/seats`
 
   useState(() => {
@@ -23,7 +25,7 @@ export default function SeatsPage() {
     return 'carregando'
   }
 
-  console.log(data)
+  // console.log(data)
 
   function handleClick(seat) {
     const seatIndex = seatsList.findIndex(item => item.id === seat.id)
@@ -35,13 +37,39 @@ export default function SeatsPage() {
       } else {
         // O assento não está na lista, então vamos adicioná-lo
         setSeatsList(prevState => [...prevState, seat])
+        setSeatsListId(prevState => [...prevState, seat.id])
       }
     } else {
       alert('Assento indisponível')
     }
   }
 
-  console.log('lista de assentos', seatsList)
+  // console.log('lista de assentos', seatsListId)
+
+  function addReserva(e) {
+    e.preventDefault()
+
+    const reservado = {
+      ids: seatsListId,
+      name: name,
+      cpf: cpf
+    }
+
+    const URL =
+      ' https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many'
+
+    const promise = axios.post(URL, reservado)
+    promise.then(response => alert('Imagem enviada com sucesso', response))
+    promise.catch(erro => console.log('ouve algummmm erro', erro.response.data))
+
+    console.log(name)
+    console.log(cpf)
+
+    // add nome e cpf e lista de assentos reservados
+    // e ser redirecionado para a rota /sucesso e os assentos fiquem indisponiveis
+  }
+
+  // console.log('lista de assentos', seatsList)
 
   return (
     <PageContainer>
@@ -78,11 +106,25 @@ export default function SeatsPage() {
         </CaptionItem>
       </CaptionContainer>
       <FormContainer>
-        Nome do Comprador:
-        <input placeholder="Digite seu nome..." />
-        CPF do Comprador:
-        <input placeholder="Digite seu CPF..." />
-        <button>Reservar Assento(s)</button>
+        <form onSubmit={addReserva}>
+          <label htmlFor="name">Nome do Comprador:</label>
+          <input
+            id="name"
+            placeholder="Digite seu nome..."
+            value={name}
+            required
+            onChange={e => setName(e.target.value)}
+          />
+          <label htmlFor="cpf">CPF do Comprador:</label>
+          <input
+            id="cpf"
+            placeholder="Digite seu CPF..."
+            value={cpf}
+            required
+            onChange={e => setCpf(e.target.value)}
+          />
+          <button type="submit">Reservar Assento(s)</button>
+        </form>
       </FormContainer>
       <FooterContainer>
         <div>
