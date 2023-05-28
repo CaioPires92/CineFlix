@@ -1,15 +1,16 @@
 import axios from 'axios'
 import { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 
 export default function SeatsPage() {
   const [data, setData] = useState([])
-  const { idShowtime } = useParams()
   const [seatsList, setSeatsList] = useState([])
   const [seatsListId, setSeatsListId] = useState([])
   const [name, setName] = useState('')
   const [cpf, setCpf] = useState('')
+  const navite = useNavigate()
+  const { idShowtime } = useParams()
   const URL = `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idShowtime}/seats`
 
   useState(() => {
@@ -59,13 +60,12 @@ export default function SeatsPage() {
       ' https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many'
 
     const promise = axios.post(URL, reservado)
-    promise.then(response => alert('Imagem enviada com sucesso', response))
+    promise.then(response => navite('/sucess'))
     promise.catch(erro => console.log('ouve algummmm erro', erro.response.data))
 
     console.log(name)
     console.log(cpf)
 
-    // add nome e cpf e lista de assentos reservados
     // e ser redirecionado para a rota /sucesso e os assentos fiquem indisponiveis
   }
 
