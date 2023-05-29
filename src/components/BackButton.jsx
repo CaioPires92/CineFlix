@@ -15,7 +15,12 @@ const BackButton = () => {
     <div>
       {/* Resto do conteúdo do seu app */}
       {exibirBotaoVoltar && (
-        <CornerButton onClick={voltarParaAnterior}>Voltar</CornerButton>
+        <CornerButton
+          data-test="go-home-header-btn"
+          onClick={voltarParaAnterior}
+        >
+          Voltar
+        </CornerButton>
       )}
     </div>
   )
