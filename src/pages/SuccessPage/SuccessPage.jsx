@@ -1,71 +1,97 @@
-import styled from "styled-components"
+import { useLocation, useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 
 export default function SuccessPage() {
+  const location = useLocation()
+  const dados = location.state
+  const navigate = useNavigate()
 
-    return (
-        <PageContainer>
-            <h1>Pedido feito <br /> com sucesso!</h1>
+  function voltarHome() {
+    navigate('/', { state: {} })
+  }
 
-            <TextContainer>
-                <strong><p>Filme e sessão</p></strong>
-                <p>Tudo em todo lugar ao mesmo tempo</p>
-                <p>03/03/2023 - 14:00</p>
-            </TextContainer>
+  function voltar() {
+    navigate(`/seats/${dados.idShowtime}`, { state: {} })
+  }
 
-            <TextContainer>
-                <strong><p>Ingressos</p></strong>
-                <p>Assento 01</p>
-                <p>Assento 02</p>
-                <p>Assento 03</p>
-            </TextContainer>
+  console.log(dados)
 
-            <TextContainer>
-                <strong><p>Comprador</p></strong>
-                <p>Nome: Letícia Chijo</p>
-                <p>CPF: 123.456.789-10</p>
-            </TextContainer>
+  return (
+    <PageContainer>
+      <button onClick={voltar}> 🔙 Voltar</button>
 
-            <button>Voltar para Home</button>
-        </PageContainer>
-    )
+      <h1>
+        Pedido feito <br /> com sucesso!
+      </h1>
+
+      <TextContainer>
+        <strong>
+          <p>Filme e sessão</p>
+        </strong>
+        <p>{dados.filme.title}</p>
+        <p>
+          {dados.dia.date} - {dados.horario}
+        </p>
+      </TextContainer>
+
+      <TextContainer>
+        <strong>
+          <p>Ingressos</p>
+        </strong>
+        {dados.seatsList.map(seat => (
+          <p key={seat.name}>{seat.name}</p>
+        ))}
+      </TextContainer>
+
+      <TextContainer>
+        <strong>
+          <p>Comprador</p>
+        </strong>
+        <p>Nome: {dados.name}</p>
+        <p>CPF: {dados.cpf}</p>
+      </TextContainer>
+
+      <button onClick={voltarHome}>Voltar para Home</button>
+    </PageContainer>
+  )
 }
 
 const PageContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Roboto';
+  font-size: 24px;
+  color: #293845;
+  margin: 30px 20px;
+  padding-bottom: 120px;
+  padding-top: 70px;
+  a {
+    text-decoration: none;
+  }
+  button {
+    margin-top: 50px;
+  }
+  h1 {
     font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
     font-size: 24px;
-    color: #293845;
-    margin: 30px 20px;
-    padding-bottom: 120px;
-    padding-top: 70px;
-    a {
-        text-decoration: none;
-    }
-    button {
-        margin-top: 50px;
-    }
-    h1 {
-        font-family: 'Roboto';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 24px;
-        line-height: 28px;
-        display: flex;
-        align-items: center;
-        text-align: center;
-        color: #247A6B;
-    }
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #247a6b;
+  }
 `
 const TextContainer = styled.div`
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 30px;
-    strong {
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 30px;
+  strong {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
 `

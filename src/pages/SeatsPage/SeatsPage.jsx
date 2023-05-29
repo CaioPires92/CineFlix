@@ -9,7 +9,7 @@ export default function SeatsPage() {
   const [seatsListId, setSeatsListId] = useState([])
   const [name, setName] = useState('')
   const [cpf, setCpf] = useState('')
-  const navite = useNavigate()
+  const navigate = useNavigate()
   const { idShowtime } = useParams()
   const URL = `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idShowtime}/seats`
 
@@ -55,21 +55,29 @@ export default function SeatsPage() {
       name: name,
       cpf: cpf
     }
+    const dataReservation = {
+      ids: seatsListId,
+      name: name,
+      cpf: cpf,
+      seatsList: seatsList,
+      filme: data.movie,
+      horario: data.name,
+      dia: data.day,
+      idShowtime: idShowtime
+    }
 
     const URL =
       ' https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many'
 
     const promise = axios.post(URL, reservado)
-    promise.then(response => navite('/sucess'))
-    promise.catch(erro => console.log('ouve algummmm erro', erro.response.data))
+    promise.then(response => navigate('/sucess', { state: dataReservation }))
+    promise.catch(erro => console.log(erro.response.data))
 
     console.log(name)
     console.log(cpf)
-
-    // e ser redirecionado para a rota /sucesso e os assentos fiquem indisponiveis
   }
 
-  // console.log('lista de assentos', seatsList)
+  console.log(data.movie)
 
   return (
     <PageContainer>
