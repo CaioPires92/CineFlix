@@ -32,7 +32,7 @@ export default function SessionsPage() {
             <ButtonsContainer>
               {day.showtimes.map(showtime => (
                 <div key={showtime.id}>
-                  <Link data-test="showtime" to={`/seats/${showtime.id}`}>
+                  <Link data-test="showtime" to={`/assentos/${showtime.id}`}>
                     <button>{showtime.name}</button>
                   </Link>
                 </div>
