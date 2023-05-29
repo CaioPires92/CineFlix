@@ -32,9 +32,9 @@ export default function HomePage() {
   return (
     <PageContainer>
       Selecione o filme
-      <ListContainer>
+      <ListContainer data-test="movie">
         {data.map(data => (
-          <div data-test="movie" key={data.id}>
+          <div key={data.id}>
             <MovieContainer>
               <Link to={`/sessions/${data.id}`}>
                 <img src={data.posterURL} alt="poster" />
