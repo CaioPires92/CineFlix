@@ -32,11 +32,11 @@ export default function HomePage() {
   return (
     <PageContainer>
       Selecione o filme
-      <ListContainer data-test="movie">
+      <ListContainer>
         {data.map(data => (
           <div key={data.id}>
             <MovieContainer>
-              <Link to={`/sessions/${data.id}`}>
+              <Link data-test="movie" to={`/sessoes/${data.id}`}>
                 <img src={data.posterURL} alt="poster" />
               </Link>
             </MovieContainer>

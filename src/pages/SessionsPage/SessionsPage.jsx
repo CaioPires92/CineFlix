@@ -6,12 +6,12 @@ import styled from 'styled-components'
 
 export default function SessionsPage() {
   const [data, setData] = useState([])
-  const { idSession } = useParams()
+  const { idFilme } = useParams()
 
   console.log(data)
 
   useEffect(() => {
-    const URL = `https://mock-api.driven.com.br/api/v8/cineflex/movies/${idSession}/showtimes`
+    const URL = `https://mock-api.driven.com.br/api/v8/cineflex/movies/${idFilme}/showtimes`
     axios
       .get(URL)
       .then(response => setData(response.data))

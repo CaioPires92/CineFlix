@@ -19,7 +19,7 @@ export default function App() {
         <BackButton />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/sessions/:idSession" element={<SessionsPage />} />
+          <Route path="/sessoes/:idFilme" element={<SessionsPage />} />
           <Route path="/seats/:idShowtime" element={<SeatsPage />} />
           <Route path="/sucess" element={<SuccessPage />} />
         </Routes>
