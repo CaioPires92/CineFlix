@@ -10,16 +10,10 @@ export default function SuccessPage() {
     navigate('/', { state: {} })
   }
 
-  function voltar() {
-    navigate(`/seats/${dados.idShowtime}`, { state: {} })
-  }
-
   console.log(dados)
 
   return (
     <PageContainer>
-      <button onClick={voltar}> 🔙 Voltar</button>
-
       <h1>
         Pedido feito <br /> com sucesso!
       </h1>
@@ -71,6 +65,17 @@ const PageContainer = styled.div`
   }
   button {
     margin-top: 50px;
+    width: 225px;
+    height: 42px;
+    color: #ffff;
+    background-color: #e8833a;
+    border: #e8833a;
+    border-radius: 3px;
+    cursor: pointer;
+
+    &:hover {
+      filter: brightness(95%);
+    }
   }
   h1 {
     font-family: 'Roboto';

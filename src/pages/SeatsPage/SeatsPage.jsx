@@ -182,8 +182,56 @@ const FormContainer = styled.div`
   }
   input {
     width: calc(100vw - 60px);
+    height: 51px;
+    margin-top: 10px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+    border: 1px solid #d5d5d5;
+    border-radius: 3px;
+
+    &::placeholder {
+      font-style: italic;
+      font-weight: 400;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+
+      color: #afafaf;
+    }
+  }
+
+  button {
+    margin-top: 50px;
+    width: 225px;
+    height: 42px;
+
+    background-color: #e8833a;
+    border-color: #e8833a;
+    border-radius: 3px;
+
+    font-weight: 400;
+    font-size: 18px;
+
+    cursor: pointer;
+    color: #ffffff;
+  }
+
+  label {
+    margin-top: 20px;
+    margin-left: 10px;
+    width: calc(100vw - 60px);
+
+    height: 25px;
+
+    font-size: 18px;
+    display: flex;
+    align-items: flex-start;
+    color: #293845;
   }
 `
+
 const CaptionContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -196,21 +244,21 @@ const CaptionCircle = styled.div`
     ${props => {
       switch (props.status) {
         case 'selected':
-          return 'green'
+          return '#0E7D71'
         case 'not-available':
-          return 'red'
+          return '#F7C52B'
         case 'available':
-          return 'gray'
+          return '#7B8B99'
       }
     }};
   background-color: ${props => {
     switch (props.status) {
       case 'selected':
-        return 'green'
+        return '#1AAE9E'
       case 'not-available':
-        return 'red'
+        return '#FBE192'
       case 'available':
-        return 'gray'
+        return '#C3CFD9'
     }
   }};
   height: 25px;
@@ -230,13 +278,13 @@ const CaptionItem = styled.div`
 const SeatItem = styled.div`
   border: 1px solid
     ${props =>
-      props.isSelected ? 'green' : props.isAvailable ? 'gray' : 'red'};
+      props.isSelected ? '#0E7D71' : props.isAvailable ? '#7B8B99' : '#F7C52B'};
   background-color: ${props =>
     props.isSelected
-      ? 'green'
+      ? '#1AAE9E'
       : props.isAvailable
-      ? 'gray'
-      : 'red'}; // Essa cor deve mudar
+      ? '#C3CFD9'
+      : '#FBE192'}; // Essa cor deve mudar
   height: 25px;
   width: 25px;
   border-radius: 25px;

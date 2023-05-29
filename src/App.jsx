@@ -5,6 +5,7 @@ import SeatsPage from './pages/SeatsPage/SeatsPage'
 import SessionsPage from './pages/SessionsPage/SessionsPage'
 import SuccessPage from './pages/SuccessPage/SuccessPage'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import BackButton from './components/BackButton'
 
 export default function App() {
   axios.defaults.headers.common['Authorization'] = '8dzF6yBI5huhv1KCdXsobY94'
@@ -15,6 +16,7 @@ export default function App() {
         <Link to={'/'}>
           <NavContainer>CINEFLEX</NavContainer>
         </Link>
+        <BackButton />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/sessions/:idSession" element={<SessionsPage />} />
